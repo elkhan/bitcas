@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Currency from './components/Currency';
-import { fetchCurrency } from './actions/fetchCurrency';
+import fetchCurrency from './actions/fetchCurrency';
 import './App.css';
 
 // Testing routes. This will move to middleware
