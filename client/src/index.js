@@ -9,7 +9,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const initialState = {};
-const middleware = []; // [thunk];
+const middleware = [thunk];
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
