@@ -12,7 +12,7 @@ const fetchSample = () => {
       console.log(data);
     });
 };
-
+// No time to separate components into containers
 class App extends Component {
   constructor(props) {
     super(props);
