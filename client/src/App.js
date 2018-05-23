@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Currency from './components/Currency';
+import { fetchCurrency } from './actions/fetchCurrency';
+import './App.css';
 
 // Testing routes. This will move to middleware
 const url = 'http://localhost:5000/api/currency';
@@ -27,7 +30,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchSample();
+    // TODO:
   }
 
   onHandleCurrency(event) {
@@ -37,12 +40,15 @@ class App extends Component {
     });
   }
 
-  onClickFetch() {}
+  onClickFetch(event) {
+    event.preventDefault();
+    this.props.fetchCurrency(this.state.currency);
+  }
 
   render() {
     return (
       <div className="main">
-        <Currency />
+        <Currency currency={this.props.currency} />
         <Form
           onHandleCurrency={this.onHandleCurrency}
           onClickFetch={this.onClickFetch}
@@ -53,4 +59,19 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  currency: PropTypes.number.isRequired,
+  fetchCurrency: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchCurrency: currency => dispatch(fetchCurrency(currency)),
+});
+
+/* eslint-disable no-unused-vars */
+const mapStateToProps = (state, ownProps) => ({
+  /* eslint-enable */
+  currency: state.currency,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
