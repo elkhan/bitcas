@@ -29,4 +29,14 @@ router.get("/:name", (req, res) => {
     .catch(error => res.send(error));
 });
 
+router.delete("/:name", (req, res) => {
+  db.Currency.remove({ name: req.params.name })
+    .then(() => {
+      res.send({ message: "Deleted" });
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+
 module.exports = router;
