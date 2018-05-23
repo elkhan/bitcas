@@ -12,7 +12,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  db.Currency.create(req.body)
+  let name = req.body.name;
+  db.Currency.create({ name })
     .then(currency => {
       res.status(201).json(currency);
     })
