@@ -15,19 +15,13 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let currency = {};
-  request(url, (err, res, body) => {
-    if (err) {
-      res.send(err);
-    } else {
-      let currencies = JSON.parse(body);
-      for (name in currencies) {
-        currency.name = name;
-        currency.value = currencies[name];
-        db.Currency.create(currency);
-      }
-    }
-  });
+  db.Currency.create(req.body)
+    .then(currency => {
+      res.status(201).json(currency);
+    })
+    .catch(error => {
+      res.send(error);
+    });
 });
 
 router.get("/:name", (req, res) => {
