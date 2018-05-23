@@ -36,6 +36,7 @@ router.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
+  // TODO: Uncomment below
   // pingWithInterval();
   console.log("Listening on port: ", PORT);
 });
