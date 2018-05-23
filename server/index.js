@@ -19,7 +19,7 @@ app.use("/api/currency", currencyRoutes);
 
 app.use("/fetch/:value", (req, res) => {
   axios
-    .get(config.url + req.params.value)
+    .get(config.url + req.params.value + config.money)
     .then(result => {
       console.log(result.data);
     })
