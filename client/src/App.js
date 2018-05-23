@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Form from './components/Form';
+import Currency from './components/Currency';
 
 // Testing routes. This will move to middleware
 const url = 'http://localhost:5000/api/currency';
@@ -41,6 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className="main">
+        <Currency />
         <Form
           onHandleCurrency={this.onHandleCurrency}
           onClickFetch={this.onClickFetch}

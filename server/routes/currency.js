@@ -1,10 +1,7 @@
 const express = require("express");
-const request = require("request");
 const db = require("../models");
 /* eslint new-cap: 0 */
 const router = express.Router();
-const val = "EUR";
-const url = `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=${val}`;
 
 router.get("/", (req, res) => {
   db.Currency.find()
