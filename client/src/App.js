@@ -41,7 +41,11 @@ class App extends Component {
   render() {
     return (
       <div className="main">
-        <Form onHandleCurrency={this.onHandleCurrency} onClickFetch={this.onClickFetch} value={this.state.currency} />
+        <Form
+          onHandleCurrency={this.onHandleCurrency}
+          onClickFetch={this.onClickFetch}
+          currency={this.state.currency}
+        />
       </div>
     );
   }

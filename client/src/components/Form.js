@@ -20,7 +20,7 @@ const Form = props => (
 Form.propTypes = {
   onHandleCurrency: PropTypes.func.isRequired,
   onClickFetch: PropTypes.func.isRequired,
-  currency: PropTypes.string.isRequired,
+  currency: PropTypes.string,
 };
 
 export default Form;
