@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/:name", (req, res) => {
-  db.Currency.find(req.params.name)
+  db.Currency.findOne({ name: req.params.name })
     .then(currency => {
       res.json(currency);
     })
