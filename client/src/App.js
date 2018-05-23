@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Form from './components/Form';
 
+// Testing routes. This will move to middleware
 const url = 'http://localhost:5000/api/currency';
 
 const fetchSample = () => {
