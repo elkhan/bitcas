@@ -36,6 +36,7 @@ class App extends Component {
   onHandleCurrency(event) {
     event.preventDefault();
     this.setState({
+      // Not neccessary since one model only
       [event.target.name]: event.target.value,
     });
   }
