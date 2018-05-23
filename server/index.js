@@ -1,8 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const axios = require("axios");
-const config = require("./config");
 const pingWithInterval = require("./helpers/fetchAPI");
 
 /* eslint new-cap: 0 */
@@ -17,17 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const currencyRoutes = require("./routes/currency");
 
 app.use("/api/currency", currencyRoutes);
-
-app.use("/fetch/:value", (req, res) => {
-  axios
-    .get(config.url + req.params.value + config.money)
-    .then(result => {
-      console.log(result.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
 
 router.get("/", (req, res) => {
   res.send({ its: "Working" });
