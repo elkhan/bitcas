@@ -17,11 +17,9 @@ const currencyRoutes = require("./routes/currency");
 
 app.use("/api/currency", currencyRoutes);
 
-const val = "EUR";
-
-app.use("/fetch", (req, res) => {
+app.use("/fetch/:value", (req, res) => {
   axios
-    .get(config.url + val)
+    .get(config.url + req.params.value)
     .then(result => {
       console.log(result.data);
     })
