@@ -3,26 +3,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Currency from './components/Currency';
-import fetchCurrency from './actions/fetchCurrency';
+import * as currencyActions from './actions/currencyActions';
+
 import './App.css';
 
-// Testing routes. This will move to middleware
-const url = 'http://localhost:5000/api/currency';
-
-const fetchSample = () => {
-  fetch(url)
-    .then(results => results.json())
-    .then(data => {
-      console.log(data);
-    });
-};
 // No time to separate components into containers
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currency: '',
+      currency: { name: '' },
     };
 
     this.onHandleCurrency = this.onHandleCurrency.bind(this);
@@ -35,9 +26,10 @@ class App extends Component {
 
   onHandleCurrency(event) {
     event.preventDefault();
+    const { currency } = this.state;
+    currency.name = event.target.value;
     this.setState({
-      // Not neccessary since one model only
-      [event.target.name]: event.target.value,
+      currency,
     });
   }
 
@@ -48,31 +40,47 @@ class App extends Component {
 
   render() {
     return (
+      /* eslint no-underscore-dangle: 0 */
       <div className="main">
-        <Currency currency={this.props.currency} />
-        <Form
-          onHandleCurrency={this.onHandleCurrency}
-          onClickFetch={this.onClickFetch}
-          currency={this.state.currency}
-        />
+        <div className="form">
+          <Form
+            onHandleCurrency={this.onHandleCurrency}
+            onClickFetch={this.onClickFetch}
+            name={this.state.currency.name}
+          />
+        </div>
+        <div className="currency_container">
+          <ul>
+            {this.props.currencies.map(currency => (
+              <Currency key={currency._id} name={currency.name} value={currency.value} />
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  currency: PropTypes.number.isRequired,
+  currencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      currency: {
+        name: PropTypes.string,
+        value: PropTypes.number,
+      },
+    })
+  ).isRequired,
   fetchCurrency: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchCurrency: currency => dispatch(fetchCurrency(currency)),
+  fetchCurrency: crypto => dispatch(currencyActions.asyncFetchCurrency(crypto)),
 });
 
 /* eslint-disable no-unused-vars */
 const mapStateToProps = (state, ownProps) => ({
   /* eslint-enable */
-  currency: state.currency,
+  currencies: state.currencies,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,13 +1,13 @@
-.login {
+.form {
   display: flex;
   justify-content: center;
 }
 
-.login_form {
-  width: 400px;
+.currency_form {
+  /* width: 400px; */
 }
 
-.login_form input {
+.currency_form input {
   margin: 5px;
   border: 1px solid slategrey;
   padding: 5px;

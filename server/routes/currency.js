@@ -1,5 +1,7 @@
 const express = require("express");
 const db = require("../models");
+const axios = require("axios");
+const config = require("../config");
 /* eslint new-cap: 0 */
 const router = express.Router();
 
@@ -12,15 +14,42 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let name = req.body.name;
-  db.Currency.create({ name })
-    .then(currency => {
-      res.status(201).json(currency);
+  let name = JSON.parse(req.body.name);
+  axios
+    .get(config.url + name + config.money)
+    .then(result => {
+      for (const sym in result.data) {
+        if (result.data.hasOwnProperty(sym)) {
+          db.Currency.create({
+            name: name,
+            value: result.data[sym]
+          })
+            .then(currency => {
+              res.status(201).json(currency);
+            })
+            .catch(error => {
+              res.send(error);
+            });
+        }
+      }
     })
-    .catch(error => {
-      res.send(error);
+    .catch(err => {
+      console.log(err);
     });
 });
+
+/*
+db.Currency.create({
+    name,
+    value
+  })
+  .then(currency => {
+    res.status(201).json(currency);
+  })
+  .catch(error => {
+    res.send(error);
+  });
+*/
 
 router.get("/:name", (req, res) => {
   db.Currency.findOne({ name: req.params.name })

@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
 .currencies{
   list-style: none;
+  font-family: 'Audiowide', 'Courier New', Courier, monospace;
+}
+
+.currency_container {
+  display: flex;
+  justify-content: center;
+}
+
+.currency_container ul {
+  padding: 0;
 }

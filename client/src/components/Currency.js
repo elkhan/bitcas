@@ -4,12 +4,20 @@ import '../styles/Currency.css';
 
 const Currency = props => (
   <li className="currencies">
-    <p className="price">{props.currency}</p>
+    <p>
+      {props.name}: {props.value}
+    </p>
   </li>
 );
 
 Currency.propTypes = {
-  currency: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  value: PropTypes.number,
+};
+
+Currency.defaultProps = {
+  name: '',
+  value: undefined,
 };
 
 export default Currency;
