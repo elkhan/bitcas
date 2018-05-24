@@ -8,6 +8,7 @@ const fetchCurrencyReducer = (state = [], action) => {
     case types.DELETE_CURRENCY:
       return state.filter(currency => currency.name !== action.name);
     case types.FETCH_ALL_CURRENCIES:
+      // FIXME: Should ignore if the same _id
       return [...state, ...action.currencies];
     default:
       return state;
