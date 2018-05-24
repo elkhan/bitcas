@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
     .catch(error => res.send(error));
 });
 
+// FIXME: Midleware!!
 router.post("/", (req, res) => {
   let name = JSON.parse(req.body.name);
   axios
