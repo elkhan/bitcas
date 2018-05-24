@@ -38,3 +38,7 @@ export const asyncRemoveCurrency = name => dispatch =>
   })
     .then(response => dispatch(deleteCurrency(response.data)))
     .catch(err => console.log(err));
+
+// Fetching all currencies
+export const asyncfetchAllCurrencies = () => dispatch =>
+  axios.get(ROOT_URL).then(response => dispatch(fetchAllCurrencies(response.data)));

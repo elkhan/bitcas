@@ -22,7 +22,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // TODO:
+    this.interval = setInterval(this.props.pingBackendWithInterval, 300000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onHandleCurrency(event) {
@@ -83,11 +87,13 @@ App.propTypes = {
   ).isRequired,
   fetchCurrency: PropTypes.func.isRequired,
   removeCurrency: PropTypes.func.isRequired,
+  pingBackendWithInterval: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchCurrency: crypto => dispatch(currencyActions.asyncFetchCurrency(crypto)),
   removeCurrency: currency => dispatch(currencyActions.asyncRemoveCurrency(currency)),
+  pingBackendWithInterval: () => dispatch(currencyActions.asyncfetchAllCurrencies()),
 });
 
 /* eslint-disable no-unused-vars */
