@@ -18,6 +18,7 @@ class App extends Component {
 
     this.onHandleCurrency = this.onHandleCurrency.bind(this);
     this.onClickFetch = this.onClickFetch.bind(this);
+    this.onCurrencyRemove = this.onCurrencyRemove.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,11 @@ class App extends Component {
     event.preventDefault();
     this.props.fetchCurrency(this.state.currency);
   }
+  onCurrencyRemove(event, currency) {
+    event.preventDefault();
+    console.log(currency.name);
+    this.props.removeCurrency(currency.name);
+  }
 
   render() {
     return (
@@ -52,7 +58,12 @@ class App extends Component {
         <div className="currency_container">
           <ul>
             {this.props.currencies.map(currency => (
-              <Currency key={currency._id} name={currency.name} value={currency.value} />
+              <Currency
+                key={currency._id}
+                name={currency.name}
+                value={currency.value}
+                onCurrencyRemove={event => this.onCurrencyRemove(event, currency)}
+              />
             ))}
           </ul>
         </div>
@@ -71,10 +82,12 @@ App.propTypes = {
     })
   ).isRequired,
   fetchCurrency: PropTypes.func.isRequired,
+  removeCurrency: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchCurrency: crypto => dispatch(currencyActions.asyncFetchCurrency(crypto)),
+  removeCurrency: currency => dispatch(currencyActions.asyncRemoveCurrency(currency)),
 });
 
 /* eslint-disable no-unused-vars */

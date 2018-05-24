@@ -4,6 +4,9 @@ import '../styles/Currency.css';
 
 const Currency = props => (
   <li className="currencies">
+    <span id="remove" onClick={props.onCurrencyRemove}>
+      x
+    </span>
     <p>
       {props.name}: {props.value}
     </p>
@@ -13,6 +16,7 @@ const Currency = props => (
 Currency.propTypes = {
   name: PropTypes.string,
   value: PropTypes.number,
+  onCurrencyRemove: PropTypes.func.isRequired,
 };
 
 Currency.defaultProps = {

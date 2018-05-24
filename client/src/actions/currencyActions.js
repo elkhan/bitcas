@@ -18,6 +18,7 @@ export const fetchAllCurrencies = currencies => ({
   type: types.FETCH_ALL_CURRENCIES,
 });
 
+// Async actions
 export const asyncFetchCurrency = crypto => dispatch =>
   axios({
     method: 'POST',
@@ -27,4 +28,13 @@ export const asyncFetchCurrency = crypto => dispatch =>
     },
   })
     .then(response => dispatch(fetchCurrency(response.data)))
+    .catch(err => console.log(err));
+
+// Deleting a currency from DB and state
+export const asyncRemoveCurrency = name => dispatch =>
+  axios({
+    method: 'DELETE',
+    url: ROOT_URL + name,
+  })
+    .then(response => dispatch(deleteCurrency(response.data)))
     .catch(err => console.log(err));

@@ -3,6 +3,12 @@
 .currencies{
   list-style: none;
   font-family: 'Audiowide', 'Courier New', Courier, monospace;
+  width: 150px;
+}
+
+#remove {
+  float: right;
+  cursor: pointer;
 }
 
 .currency_container {

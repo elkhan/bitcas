@@ -38,19 +38,6 @@ router.post("/", (req, res) => {
     });
 });
 
-/*
-db.Currency.create({
-    name,
-    value
-  })
-  .then(currency => {
-    res.status(201).json(currency);
-  })
-  .catch(error => {
-    res.send(error);
-  });
-*/
-
 router.get("/:name", (req, res) => {
   db.Currency.findOne({ name: req.params.name })
     .then(currency => {
@@ -62,7 +49,7 @@ router.get("/:name", (req, res) => {
 router.delete("/:name", (req, res) => {
   db.Currency.remove({ name: req.params.name })
     .then(() => {
-      res.send({ message: "Deleted" });
+      res.send(req.params.name);
     })
     .catch(err => {
       res.send(err);
