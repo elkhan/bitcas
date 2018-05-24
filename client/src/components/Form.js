@@ -5,13 +5,17 @@ import '../styles/Form.css';
 const Form = props => (
   <div className="form">
     <form className="currency_form">
-      <input
-        type="text"
-        placeholder="Enter currency"
-        onChange={props.onHandleCurrency}
-        name="name"
-        value={props.name}
-      />
+      <label htmlFor="name">
+        {['BTC ', 'ETH ', 'LTC ']}
+        <br />
+        <input
+          type="text"
+          placeholder="Enter currency"
+          onChange={props.onHandleCurrency}
+          name="name"
+          value={props.name}
+        />
+      </label>
       <input type="button" value="Submit" onClick={props.onClickFetch} />
     </form>
   </div>
