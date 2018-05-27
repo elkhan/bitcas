@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const expressGraphQL = require("express-graphql");
 const pingWithInterval = require("./helpers/fetchAPI");
 
 /* eslint new-cap: 0 */
@@ -11,6 +12,12 @@ app.use(cors());
 app.use(bodyParser.json());
 // In case of sending post request from client
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  "/graphql",
+  expressGraphQL({
+    graphiql: true
+  })
+);
 
 const currencyRoutes = require("./routes/currency");
 
